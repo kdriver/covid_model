@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.17.0/apexcharts.js"></script>
+<script src="person.js"></script>
+<script src="md.js"></script>
+  </head>
+<body>
+<div id="chart"></div>
+<button onclick="recalculate()">recalculate</button>
+<div class="slidecontainer">
+  <label for="population" >Initial Population</label>
+  <input type="textbox" id="population" name="population" value="500"></p>
+  <input type="range" min="1" max="50" value="1" class="slider" id="iterations">
+  <span>Simulation Iterations:</span> <span id="f" style="font-weight:bold;">10</span></p>
+  <input type="checkbox" id="aves_only" name="aves" value=false>
+  <label for="aves"> show min/max/ave only    </label></p> 
+  <input type="radio" id="available" name="selection" value="avail">
+  <label for="male">Available People</label>
+  <input type="radio" id="isolating" name="selection" value="isol">
+  <label for="female">Isolationg People</label>
+  <input type="radio" id="infected" name="selection" value="infect">
+  <label for="female">Infected People</label></p>
+  <input type="range" min="0.00" max="10.0" step="0.01" value="2.0" class="slider" id="isolation_percentage">
+  <span>Isolation Percentage:</span> <span id="g" style="font-weight:bold;">1.0</span></p>
+  <input type="range" min="0.00" max="10.0" step="0.01" value="1.0" class="slider" id="infection_percentage">
+  <span>Infection Percentage:</span> <span id="h" style="font-weight:bold;">0.5</span> </p>
+  <input type="range" min="0.00" max="50.0" step="1" value="1.0" class="slider" id="fortnight_percentage">
+  <span>Proportion isolating for 14 days:</span> <span id="i" style="font-weight:bold;">0.5</span></p>
+  <input type="range" min="0.00" max="100.0" step="1" value="20.0" class="slider" id="recovery_period">
+  <span>Days to recover from infection:</span> <span id="j" style="font-weight:bold;">0.5</span></p>
+</div>
+
+
+<script type="text/javascript">
+var iterations_slider = document.getElementById("iterations");
+var iter_output = document.getElementById("f");
+var isolation_slider = document.getElementById("isolation_percentage");
+var isolation_output = document.getElementById("g");
+var infection_slider = document.getElementById("infection_percentage");
+var infection_output = document.getElementById("h");// Update the current slider value (each time you drag the slider handle)
+var isolation_period_slider = document.getElementById("fortnight_percentage");
+var isolation_period_output = document.getElementById("i")
+var recovery_period_slider = document.getElementById("recovery_period");
+var recovery_period_output = document.getElementById("j")
+
+document.getElementById('available').checked = true;
+
+iterations_slider.oninput = function() {
+  iterations = parseInt(this.value);
+  iter_output.innerHTML = this.value;
+}
+isolation_slider.oninput = function() {
+  isolating_proportion_percent = parseFloat(this.value);
+  isolation_output.innerHTML = this.value;
+}
+infection_slider.oninput = function() {
+  infecting_proportion_percent = parseFloat(this.value);
+  infection_output.innerHTML = this.value;
+}
+isolation_period_slider.oninput = function() {
+  fortnight_isolation_percent = parseFloat(this.value);
+  isolation_period_output.innerHTML = this.value;
+}
+recovery_period_slider.oninput = function() {
+  recovery_period = parseInt(this.value);
+  recovery_period_output.innerHTML = this.value;
+}
+iterations_slider.oninput();
+isolation_slider.oninput();
+infection_slider.oninput();
+isolation_period_slider.oninput();
+recovery_period_slider.oninput();
+
+recalculate();    
+</script>
+</body>
+</html>
+
